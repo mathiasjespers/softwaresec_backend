@@ -12,7 +12,7 @@ def insertIntoTable(id, name, highscore, isPublic):
         print("Connected to SQLite")
 
         sqlite_insert_with_param = """INSERT INTO ClickingGame_users
-                          (id, name, email, joining_date, salary) 
+                          (id, name, highscore, isPublic) 
                           VALUES (?, ?, ?, ?);"""
 
         data_tuple = (id, name, highscore, isPublic)
