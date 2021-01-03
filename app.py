@@ -5,7 +5,8 @@ import sqlite3
 app = Flask(__name__)
 CORS(app, supports_credentials=True, origins="*")
 
-def insertIntoTable(id, name, highscore, isPublic):
+
+def insertIntoTable(uid, name, highscore, isPublic):
     try:
         sqliteConnection = sqlite3.connect('SQLite_Python.db')
         cursor = sqliteConnection.cursor()
@@ -15,7 +16,7 @@ def insertIntoTable(id, name, highscore, isPublic):
                           (id, name, highscore, isPublic) 
                           VALUES (?, ?, ?, ?);"""
 
-        data_tuple = (id, name, highscore, isPublic)
+        data_tuple = (uid, name, highscore, isPublic)
         cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
         print("Python Variables inserted successfully into ClickingGame_users table")
@@ -25,12 +26,13 @@ def insertIntoTable(id, name, highscore, isPublic):
     except sqlite3.Error as error:
         print("Failed to insert Python variable into sqlite table", error)
     finally:
-        if (sqliteConnection):
+        if sqliteConnection:
             sqliteConnection.close()
             print("The SQLite connection is closed")
 
+
 def getScore(uid):
-    highscore = -1;
+    highscore = -1
     try:
         sqliteConnection = sqlite3.connect('SQLite_Python.db')
         cursor = sqliteConnection.cursor()
@@ -47,10 +49,10 @@ def getScore(uid):
     except sqlite3.Error as error:
         print("Failed to read data from sqlite table", error)
     finally:
-        if (sqliteConnection):
+        if sqliteConnection:
             sqliteConnection.close()
             print("The SQLite connection is closed")
-    return highscore;
+    return highscore
 
 
 def updateScore(uid, score):
@@ -69,9 +71,10 @@ def updateScore(uid, score):
     except sqlite3.Error as error:
         print("Failed to update sqlite table", error)
     finally:
-        if (sqliteConnection):
+        if sqliteConnection:
             sqliteConnection.close()
             print("The sqlite connection is closed")
+
 
 # flask get highscore route
 @app.route('/highscore', methods=['GET'])
@@ -97,5 +100,5 @@ def post():
 
 
 if __name__ == '__main__':
-    context = ('local.crt', 'local.key')    #certificate and key files
+    context = ('local.crt', 'local.key')  # certificate and key files
     app.run(debug=True, ssl_context=context)
