@@ -1,5 +1,6 @@
 # softwaresec_backend
 Software Security webapp api with Flask
+
 Deze api wordt gehost via heroku op https://clickinggame-api.herokuapp.com/
 
 ### How to use:
