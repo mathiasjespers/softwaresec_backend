@@ -3,7 +3,7 @@ from flask_cors import CORS
 import sqlite3
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, origins="*")
+CORS(app, supports_credentials=True, origins="https://mathiasjespers.be")
 
 
 def insertIntoTable(uid, name, highscore, isPublic):
@@ -99,5 +99,4 @@ def post():
     return 0
 
 if __name__ == '__main__':
-    context = ('local.crt', 'local.key')  # certificate and key files
-    app.run(debug=True, ssl_context=context)
+    app.run()
